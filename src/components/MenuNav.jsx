@@ -12,7 +12,9 @@ function MenuNav() {
                 <li>
                 <Link to="/contacto">contacto</Link>
                 </li>
-                <li>Ayuda</li>
+                <li>
+                <Link to="/blog">Blog</Link>
+                </li>
             </ul>
         </div>
     )
