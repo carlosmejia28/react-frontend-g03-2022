@@ -1,22 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Nav } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
 
 function MenuNav() {
 
     return(
-        <div>
-            <ul>
-                <li>
-                    <Link to="/"> inicio</Link>
-                </li>
-                <li>
-                <Link to="/contacto">contacto</Link>
-                </li>
-                <li>
-                <Link to="/blog">Blog</Link>
-                </li>
-            </ul>
-        </div>
+
+        <Nav className="justify-content-end" activeKey="/">
+        <Nav.Item>
+          <NavLink className="nav-link" to="/">Inicio</NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink className="nav-link" to="/contacto">Contacto</NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <NavLink className="nav-link" to="/agenda">Agendas</NavLink>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link >
+            Disabled
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+
+        
     )
     
 }export{MenuNav}
