@@ -64,7 +64,7 @@ function TablaAgendas() {
                                 <td>{agenda.id}</td>
                                 <td>{agenda.fecha}</td>
                                 <td>{agenda.id_medico}</td>
-                                <td><Link>Ver Detalle</Link></td>
+                                <td><Link to={`/agenda/${agenda.id}`}>Ver Detalle</Link></td>
                                 <td><Button variant="danger" onClick={()=>deleteAgendaById(agenda.id)}>Eliminar</Button></td>
                             </tr>
                         ))

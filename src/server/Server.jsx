@@ -23,5 +23,14 @@ export async function eliminarAgendaPorId(id) {
     return await res.text();
 };
 
+export async function findAllMedicos() {
+    const res = await fetch(BASE_URL+"medicos");
+    return await res.json();
+};
+
+export async function findAgendaById(id) {
+    const res = await fetch(BASE_URL+"agendas/"+id);
+    return await res.json();
+};
 
 
