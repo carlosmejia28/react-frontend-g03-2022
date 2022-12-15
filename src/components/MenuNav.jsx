@@ -17,9 +17,9 @@ function MenuNav() {
           <NavLink className="nav-link" to="/agenda">Agendas</NavLink>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link >
-            Disabled
-          </Nav.Link>
+          <NavLink className="nav-link" to="/agenda-citas"  >
+            Agenda Citas
+          </NavLink>
         </Nav.Item>
       </Nav>
 
