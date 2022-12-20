@@ -33,4 +33,14 @@ export async function findAgendaById(id) {
     return await res.json();
 };
 
+export async function existPacienteById(id) {
+    const res = await fetch(BASE_URL+"pacientes/existe/query?ndocumento="+id);
+    return await res.json();
+};
+
+export async function findPacienteByNdocumento(ndocumento) {
+    const res = await fetch(BASE_URL+"pacientes/ndocumento/"+ndocumento);
+    return await res.json();
+};
+
 
