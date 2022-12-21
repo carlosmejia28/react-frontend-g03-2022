@@ -21,6 +21,11 @@ function MenuNav() {
             Agenda Citas
           </NavLink>
         </Nav.Item>
+        <Nav.Item>
+        <Nav.Link href="#/pacientes">
+          Pagina de Pacientes
+        </Nav.Link>
+        </Nav.Item>
       </Nav>
 
 

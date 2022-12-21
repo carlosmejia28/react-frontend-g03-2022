@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { existPacienteById, findAgendaById,  findPacienteByNdocumento,  guardarAgenda } from "../server/Server";
+import {  existPacienteByNdocumento, findAgendaById,  findPacienteByNdocumento,  guardarAgenda } from "../server/Server";
 
 function CitasAgendaPage() {
 
@@ -35,40 +35,37 @@ function CitasAgendaPage() {
 
     async function handleSubmit(){
         if (horaRadio!=="" && ndocumento !=="") {
-             const resultado = await existPacienteById(ndocumento);
-             
-
+             const resultado = await existPacienteByNdocumento(ndocumento);
             if (resultado === true) {
                 const paciente = await findPacienteByNdocumento(ndocumento)
-                agenda.citas.push({hora:horaRadio,id_paciente:paciente.id});
-                delete agenda.nombremedico
-                delete agenda.especialidad
-                guardarAgenda(agenda);
-                alert("Cita Agendada");
-                returnToAgenda();
-
+                const consulta= pacientesAgendados.includes(paciente.id);
+                if (!consulta) {
+                    agenda.citas.push({hora:horaRadio,id_paciente:paciente.id});
+                    delete agenda.nombremedico
+                    delete agenda.especialidad
+                    guardarAgenda(agenda);
+                    alert("Cita Agendada");
+                    returnToAgenda();
+                    
+                } else {
+                    alert("Paciente ya tiene una cita en esta Agenda")
+                }
             }else{
-                alert("Número de Documento No valido")
+                alert("Paciente No Registrado")
             }
-
-            
-            
-
         }else{
             alert("Por favor rellené todos los campos")
         }
-
     }
-
     const franjaHoraria = ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00"];
-    let horariosOcupados = []
-    citas.map(cita=>(
+    let horariosOcupados = [];
+    let pacientesAgendados=[]
+    citas.map(cita=>{
         horariosOcupados.push(cita.hora)
-    ))
-
+        pacientesAgendados.push(cita.id_paciente)
+})
     return (
         <Container className="my-3">
-
             <Row>
                 <Col>
                     <p>Fecha Cita: </p>
@@ -101,14 +98,13 @@ function CitasAgendaPage() {
                             />
                         ))
                     }
-
                 </Col>
                 <Col xs lg="2">
                 <Form.Label>N° de Identificación del Paciente</Form.Label>
                 <Form.Control
                     required
                     onChange={handleChange}
-                    // type="number"
+                    type="number"
                 />
                 </Col>
             </Row>
@@ -117,7 +113,6 @@ function CitasAgendaPage() {
                 <Button variant="success" onClick={()=>handleSubmit()}>Registrar Cita</Button>
                 </Col>
             </Row>
-
         </Container>
     )
 } export { CitasAgendaPage }
